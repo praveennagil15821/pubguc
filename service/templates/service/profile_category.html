@@ -1,0 +1,48 @@
+{%extends "service/profile_base.html"%}
+
+{%block content%}
+
+<div class="wrapper">
+
+  
+        <div class="profile-card js-profile-card">
+          <div class="profile-card__img">
+            <img src="https://avatars1.githubusercontent.com/u/8537504?s=400&amp;v=4">
+          </div>
+      
+          <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">Pubg India</div>
+            <div class="profile-card__txt">List of <strong>UC Categories</strong></div>                
+            </div>
+            <a href="{%url 'category-create'%}" class="profile-card-social__item instagram" style="margin-left:44%">
+                <span class="icon-font"style="align-content: center;>
+                    <svg class="icon" style="align-content: center;"><i class="material-icons">add</i></svg>
+                </span>
+              </a>
+      
+            {%if user.is_staff == True%}
+                 
+                {%for data in datas%}       
+                <div class="profile-card-ctr">                      
+                    <button class="profile-card__button button--blue js-message-btn" style="margin:0px 0px;
+                    padding: 0px 0px;" type="submit" onclick="window.location.href='{% url 'category-update' data.id %}'">{{data}}</button>
+                    
+                    <!-- <a href="{% url 'category-delete' data.id %}" class="profile-card-social__item link">
+                        <span class="icon-font"style="align-content: center;>
+                            <svg class="icon"><i class="material-icons">delete</i></svg>
+                        </span>
+                      </a> -->
+             <button class="profile-card__button button--orange" style="margin-top:5px;" onclick="window.location.href = '{% url 'category-delete' data.id %}'">Delete</button> 
+                </div>
+
+                {%endfor%}
+                <br>
+            {%endif%}
+      
+          
+      
+        </div>
+      
+      </div>
+
+{%endblock%}    

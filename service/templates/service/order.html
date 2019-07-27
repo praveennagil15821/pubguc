@@ -1,0 +1,52 @@
+{%extends "service/lowerbase.html"%}
+
+{%block content%}
+
+
+
+	
+<div class="container">
+    <div class="shoe">
+      <h1>Scan The QR Code<br/> or use screenshot</h1>
+      <h3>Pay the required amount.</h3>
+      <h3>Using PayTM.</h3></br>
+      <img src="{{image.profile.pay_image.url}}">
+      <br>
+     
+    </div>
+    <div class="purchase">
+
+      {% load widget_tweaks %}
+     
+      <form method = "POST">
+        
+            <div class="inputs">
+                        {% for field in form %}
+                        {% csrf_token %}
+                        
+                            <label> 						
+                            <p>{{field.label}}</p>
+                            {{field|add_class:"input100"}}
+                            
+                            </label>
+                            <br>
+                        
+                        <p1>{{field.errors}}</p1>
+                    
+                        {% endfor %}
+                   
+                        <input type="submit" value="Purchase"/>
+            </div>
+                
+            
+    </form>
+
+     
+  
+    </div>
+  </div>
+  
+  
+
+
+{%endblock%}

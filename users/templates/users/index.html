@@ -1,0 +1,46 @@
+{%load static%}
+	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'users/css/util.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'users/css/main.css'%}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+		
+	<!-- Preloader Stars -->
+    <div id='stars'></div>
+    <div id='stars2'></div>
+	<div id='stars3'></div>
+	
+	{%if messages%}
+		{%for message in messages%}
+		<script>
+				alert('{{ message }}');
+		</script>
+		{%endfor%}
+		{%endif%}
+	{% block content %}{% endblock %}
+	
+	
+<!--===============================================================================================-->
+	<script src="{%static 'users/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'users/vendor/animsition/js/animsition.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'users/vendor/bootstrap/js/popper.js'%}"></script>
+	<script src="{%static 'users/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'users/vendor/select2/select2.min.js'%}"></script>
+
+	<script src="{%static 'users/js/main.js'%}"></script>
+
+</body>
+</html>

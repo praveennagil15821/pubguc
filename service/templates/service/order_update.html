@@ -1,0 +1,91 @@
+{%extends "service/tabel_base.html"%}
+
+{%block content%}
+
+  <section class="wrapper">
+    <!-- Row title -->
+        <main class="row title">
+        <ul>
+            
+            <li>Order</li>
+            <li><span class="title-hide"></span> </li>
+            <li>Email</li>
+            
+        </ul>
+        </main>
+    <!-- Row 1 - fadeIn -->
+    
+            {%if tabels.status == 'Rejected' %}
+                <section class="row-fadeIn-wrapper">
+                <article class="row pga">              
+            {%else%}
+                <section class="row-fadeIn-wrapper">
+                <article class="row nfl">
+            {%endif%}
+            
+                <ul>
+                <li><a>{{tabels.type|truncatewords:2}}</a><span class="small">(fadeIn)</span></li>
+                <li></li>
+                
+                <li>{{tabels.customer.email}}</li>
+                
+                
+                </ul>
+                <ul class="more-content">
+                    <li>Order of "{{tabels.type}}"| Transaction ID:- {{tabels.trans_id}}" done on "{{tabels.order_date}}". Character id -"{{tabels.character_id}}". Order will be processed within 24 hrs. Good luck!</li>
+                </ul>
+            </article>
+            </section>
+     
+    <!-- Row 2 - fadeOut -->
+    <hr style="color:black;border:solid">
+        <main class="row title">
+            <ul>
+              
+              <li>Char ID</li>
+              
+              <li></li>
+              <li><span class="title-hide"></span>Transaction ID</li>
+              <li></li>
+              <li>Status</li>
+            </ul>
+          </main>
+
+         
+          <!-- Row 1 - fadeIn -->
+          
+            {%if tabels.status == 'Rejected' %}
+                <section class="row-fadeIn-wrapper">
+                <article class="row pga">          
+            
+            {%else%}
+                <section class="row-fadeIn-wrapper">
+                        <article class="row nfl">
+            {%endif%}
+                  
+                      <ul>
+                      <li><a>{{tabels.character_id }}</a><span class="small">(fadeIn)</span></li>
+                      <!-- <li>{{tabels.type}}</li> -->
+                      <li></li>
+                      <li>{{tabels.trans_id }}</li>
+                      <li></li>
+                      <li><form method="POST">
+                            {% csrf_token %}
+                            <select name="status" class="opt"> 
+                                <option selected value="{{tabels.status}}">*{{tabels.status}}*</option>                         
+                                <option value="Rejected">Rejected</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Placed">Placed</option>                                
+                                <option value="Complete">Complete</option>
+                            </select>                        
+                            <input type="submit" class="sub">
+                        </form>
+                      </ul>
+                      <ul class="more-content">
+                            <li>Char_ID "{{tabels.character_id}}". Order will be processed within 24 hrs. Good luck!</li>
+                      </ul>
+                  </article>
+                </section>    
+  </section>
+<!-- partial -->
+{%endblock%}

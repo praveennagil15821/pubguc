@@ -1,0 +1,73 @@
+
+.svg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 500px;
+}
+
+.rocket {
+  -webkit-animation: takeoff 3s linear infinite alternate;
+          animation: takeoff 3s linear infinite alternate;
+}
+
+.woman {
+  -webkit-transform-origin: 80% 75%;
+          transform-origin: 80% 75%;
+  -webkit-animation: fallback 3s linear infinite alternate;
+          animation: fallback 3s linear infinite alternate;
+}
+
+@-webkit-keyframes takeoff {
+  from {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  to {
+    -webkit-transform: translateY(-40px);
+            transform: translateY(-40px);
+  }
+}
+
+@keyframes takeoff {
+  from {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  to {
+    -webkit-transform: translateY(-40px);
+            transform: translateY(-40px);
+  }
+}
+@-webkit-keyframes fallback {
+  from {
+    -webkit-transform: rotateZ(0);
+            transform: rotateZ(0);
+  }
+  to {
+    -webkit-transform: rotateZ(15deg);
+            transform: rotateZ(15deg);
+  }
+}
+@keyframes fallback {
+  from {
+    -webkit-transform: rotateZ(0);
+            transform: rotateZ(0);
+  }
+  to {
+    -webkit-transform: rotateZ(15deg);
+            transform: rotateZ(15deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .svg-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 350px;
+  }
+  
+}

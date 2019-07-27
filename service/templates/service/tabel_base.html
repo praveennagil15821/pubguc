@@ -1,0 +1,38 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CSS table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{%static 'service/css/table.css'%}">
+  <link rel="stylesheet" href="{%static 'service/css/stars.css'%}">
+</head>
+<body>
+  <!-- Preloader Stars -->
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div>
+<!-- partial:index.partial.html -->
+<h1><span class="blue">
+  {%if user.is_staff == True%}
+  <a href="{%url 'dash'%}">&lt;</a>
+  {%else%}
+  <a href="{%url 'home'%}">&lt;</a>
+  {%endif%}
+</span>     <span class="blue">&gt;</span> <span class="yellow">Orders</pan></h1>
+  <h2>Your Orders with love by <a href="{%url 'home'%}">Pubg India</a></h2>
+{%if messages%}
+{%for message in messages%}
+<script>
+        alert('{{ message }}');
+    </script>
+{%endfor%}
+{%endif%}
+
+
+{% block content %}{% endblock %}
+
+
+</body>
+</html>

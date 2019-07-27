@@ -1,0 +1,68 @@
+{%extends "service/profile_base.html"%}
+
+{%block content%}
+
+<div class="wrapper">
+
+  
+        <div class="profile-card js-profile-card">
+          <div class="profile-card__img">
+            <img src="https://avatars1.githubusercontent.com/u/8537504?s=400&amp;v=4">
+          </div>
+      
+          <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">Pubg India</div>
+            <div class="profile-card__txt">For any querry drop a mail to <strong>{{data.email}}</strong></div>
+            {%if user.is_staff == True%}
+            <div class="profile-card-loc">
+                <span class="profile-card-loc__txt">
+                  <a href="{%url 'category'%}">&lt; Update UC Category &gt;</a> 
+                </span>
+              </div>
+            {%else%}
+            <div class="profile-card-loc">
+              <span class="profile-card-loc__txt">
+                Regards, Anonymous
+              </span>
+            </div>
+            {%endif%}
+
+      
+            <div class="profile-card-inf">
+              <div class="profile-card-inf__item">
+                <div class="profile-card-inf__title">{{count}}</div>
+                <div class="profile-card-inf__txt">Orders Processed</div>
+              </div>    
+              
+            </div>
+            
+      
+            {%if user.is_staff == True%}
+            <div class="profile-card-ctr">
+                <form method = "POST" enctype="multipart/form-data">
+                    {% load widget_tweaks %}
+                        {% csrf_token %}
+                        			
+                            {%if user.is_staff == True%}                           
+                            
+                            {% for field in p_form %}         
+                            <div class="profile-card-loc" style="justify-content:left;align-items:left;"><span class="profile-card-loc__txt">
+                                {{field.label}}
+                              </span></div>    
+                            <div class="error">{{field.errors}}</div>                
+                            {{field| add_class:"profile-card__button button--orange"}}
+                            {%endfor%}
+                            {%endif%}
+                    <button class="profile-card__button button--blue js-message-btn" type="submit">Update</button>
+                </form>
+              <!-- <button class="profile-card__button button--orange">Follow</button> -->
+            </div>
+            {%endif%}
+      
+          
+      
+        </div>
+      
+      </div>
+
+{%endblock%}    

@@ -1,0 +1,54 @@
+{%extends "service/tabel_base.html"%}
+
+{%block content%}
+  <section class="wrapper">
+    <!-- Row title -->
+    <main class="row title">
+      <ul>
+        
+        <li>Order</li>
+        <li><span class="title-hide">#</span> Trans ID</li>
+        <li></li>
+        <li>Status</li>
+        <li></li>
+      </ul>
+    </main>
+    <!-- Row 1 - fadeIn -->
+    {%for tabel in tabels%}
+            {%if tabel.status == 'Rejected' %}
+            <section class="row-fadeIn-wrapper">
+            <article class="row pga">              
+            {%else%}
+                <section class="row-fadeIn-wrapper">
+                <article class="row nfl">
+            {%endif%}
+            
+                <ul>
+                  {%if user.is_staff == True%}
+                    <li><a href="{%url 'order-update' tabel.id %}">{{tabel.type |truncatewords:2 }}</a><span class="small">(fadeIn)</span></li>
+                  {%else%}
+                    <li><a>{{tabel.type |truncatewords:2 }}</a><span class="small">(fadeIn)</span></li>  
+                  {%endif%}  
+                <!-- <li>{{tabel.type}}</li> -->
+                <li>{{tabel.trans_id}}</li>
+                <li></li>
+                <li>{{tabel.status}}</li>
+                <li></li>
+                </ul>
+                <ul class="more-content">
+                    {%if user.is_staff == True%}
+                    <li>Ordered on {{tabel.order_date}}|Char_Id -{{tabel.character_id}} | Transaction ID:- {{tabel.trans_id}}| Order:{{tabel.type}}. Order will be processed within 24 hrs Good luck!</li>
+                    {%else%}
+                    <li>Ordered on {{tabel.order_date}} having Character id -{{tabel.character_id}} & Transaction ID - {{tabel.trans_id}} . Order will be processed within 24 hrs. Good luck!</li>
+                    {%endif%} 
+                
+                </ul>
+            </article>
+            </section>
+    {%endfor%}    
+    <!-- Row 2 - fadeOut -->
+    
+  </section>
+<!-- partial -->
+  
+{%endblock%}

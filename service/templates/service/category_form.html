@@ -1,0 +1,49 @@
+{%extends "service/profile_base.html"%}
+
+{%block content%}
+
+<div class="wrapper">
+
+  
+        <div class="profile-card js-profile-card">
+          <div class="profile-card__img">
+            <img src="https://avatars1.githubusercontent.com/u/8537504?s=400&amp;v=4">
+          </div>
+      
+          <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">Pubg India</div>
+            
+           
+            
+      
+            {%if user.is_staff == True%}
+            <div class="profile-card-ctr">
+                <form method = "POST" enctype="multipart/form-data">
+                    {% load widget_tweaks %}
+                        {% csrf_token %}
+                        			
+                            {%if user.is_staff == True%}
+                            
+                            {% for field in form %}   
+
+                            <div class="error">{{field.errors}}</div>    
+                            <div class="profile-card-loc" style="justify-content:left;align-items:left;"><span class="profile-card-loc__txt">
+                                    {{field.label}}
+                                  </span></div> 
+                            <div>{{field| add_class:"profile-card__button button--orange"}}</div>
+                            {%endfor%}
+                            {%endif%}
+                            <br><br>
+                    <button class="profile-card__button button--blue" type="submit">Submit</button>
+                </form>
+              <!-- <button class="profile-card__button button--orange">Follow</button> -->
+            </div>
+            {%endif%}
+      
+          
+      
+        </div>
+      
+      </div>
+
+{%endblock%}    
