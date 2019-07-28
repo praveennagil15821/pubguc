@@ -39,7 +39,7 @@
                     {%if user.is_staff == True%}
                     <li>Ordered on {{tabel.order_date}}|Char_Id -{{tabel.character_id}} | Transaction ID:- {{tabel.trans_id}}| Order:{{tabel.type}}. Order will be processed within 24 hrs Good luck!</li>
                     {%else%}
-                    <li>Ordered on {{tabel.order_date}} having Character id -{{tabel.character_id}} & Transaction ID - {{tabel.trans_id}} . Order will be processed within 24 hrs. Good luck!</li>
+                    <li>Ordered on {{tabel.order_date}} having Character id -{{tabel.character_id}}. Order will be processed within 24 hrs. Good luck!.Your Transaction ID - {{tabel.trans_id}}</li>
                     {%endif%} 
                 
                 </ul>

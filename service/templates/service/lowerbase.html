@@ -50,10 +50,10 @@
                         {%if user.is_staff == True%}
                             <li><a href="{%url 'dash'%}"><span>New Orders</span></a></li>
                         {%else%}    
-                            <li><a href="{%url 'profile'%}"><span>Contact</span></a></li>
+                            <li><a href="{%url 'contact'%}"><span>Contact</span></a></li>
                         {%endif%}                     
                     {%else%}    
-                        <li><a href="{%url 'profile'%}"><span>Contact</span></a></li>
+                        <li><a href="{%url 'contact'%}"><span>Contact</span></a></li>
                     {%endif%}    
                     
             </ul>

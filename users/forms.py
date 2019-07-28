@@ -26,8 +26,11 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['pay_image']        
-        labels = {'pay_image':'PayTM QR Code'}
+        fields = ['pay_image','daily_limit','offer']        
+        labels = {'pay_image':'PayTM QR Code',
+                'daily_limit':'Orders Daily limit',
+                'offer':'Offers'
+                }
 
 class CategoryUpdateForm(forms.ModelForm):
     class Meta:

@@ -22,9 +22,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)    
     pay_image = models.ImageField(default='default.png',upload_to='profile_pay',blank=True)
-
+    daily_limit=models.IntegerField(null=False,default=1000)
+    offer=models.CharField(max_length=150,blank=True,null=True)
 
     def __str__(self):
         return f'{self.user.email} Profile'

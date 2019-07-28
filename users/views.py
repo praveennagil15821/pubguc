@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from service.models import *
 from users.models import CustomUser as user 
+from datetime import date
 from django.views.generic import (
         ListView,        
         CreateView,
@@ -41,24 +42,29 @@ def logout(request):
 def profile_update(request):
     if request.user.is_staff == True:
         if request.method == 'POST':        
+            
             try:
                 p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)   #want current pic detail instance=request.user.profile
             except:
                 messages.error(request, "Some error has been occured. Contact owner")
                 return redirect('home')
+
             if p_form.is_valid():                
                 p_form.save()
-                messages.success(request,f'Your PayTM image has been Updated!')
-                return redirect('profile')
+                messages.success(request,f'Your Profile has been Updated!')
+                return redirect('profile-update')
 
         else:
             p_form = ProfileUpdateForm()   #want current pic detail instance=request.user.profile           
             try:
                 data=user.objects.get(is_staff=True,is_superuser=False)                
-                count=Order.objects.all().count()-Order.objects.filter(status='Rejected').count()                
+                count=Order.objects.all().count()-Order.objects.filter(status='Rejected').count()   
+                today=date.today()
+                today_count=Order.objects.filter(order_date__date=today).count() 
                 content={'data':data,       
                         'count':count,
-                        'p_form':p_form
+                        'p_form':p_form,
+                        'today_count':today_count,
                 }
             except:
                 messages.error(request, "Some error has been occured. Contact owner")

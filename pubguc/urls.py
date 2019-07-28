@@ -19,7 +19,7 @@ urlpatterns = [
     
 #----------------------------------------------------------------------------------------------------
     path('',service_views.home,name='home'),
-    path('contact/',service_views.profile,name='profile'),
+    path('contact/',service_views.profile,name='contact'),
     path('payment/',service_views.payment,name='payment'),
     path('dashboard/',service_views.dashboard,name='dashboard'),
     path('is?root?ki?4sabhi?6line?m?ghusne?wale?savdhan?/',service_views.OrderListView.as_view(),name='dash'),

@@ -6,13 +6,16 @@ from django.shortcuts import render, redirect,get_object_or_404
 from service.models import Order
 from users.models import CustomUser as user 
 from . forms import *
-
+from datetime import date
 from django.views.generic import (
         ListView,                  
 )
 
 def home(request):
-    # messages.success(request, "Your order has been placed. It takes 24 hours to process.")
+    image=user.objects.get(is_staff=True,is_superuser=False)
+    msg=image.profile.offer
+    if msg:  
+        messages.success(request, msg)
     return render(request, 'service/home.html',)
 
 
@@ -42,8 +45,12 @@ def profile(request):
 @login_required
 def payment(request):
     if request.user.is_authenticated and request.method=='POST':
+        today=date.today()
+        count=Order.objects.filter(order_date__date=today).count()        
         form =OrderCreation(request.POST)
-
+        if count >= limit:
+            messages.success(request, "Daily orders limit reached. Please visit tomorrow ")
+            return redirect('home')
         if form.is_valid():
             order=form.save(commit=False)
             order.customer=request.user            
@@ -51,22 +58,29 @@ def payment(request):
             messages.success(request, "Your order has been placed. It takes 24 hours to process.")
             return redirect('dashboard')
         else:
-            messages.warning(request, "Error has been encountered. Please contact owner.")   
+            messages.warning(request, "Error has been encountered. Please contact owner.") 
+            return redirect('payment')  
 
     else:
+        today=date.today()
+        count=Order.objects.filter(order_date__date=today).count()        
         form=OrderCreation()   
         try:
             image=user.objects.get(is_staff=True,is_superuser=False)
+            limit=image.profile.daily_limit
             content={'image':image,
-                'form':form        
+                'form':form,       
             }
         except:
             image=user.objects.filter(is_staff=True,is_superuser=False).first()
+            limit=image.profile.daily_limit
             content={'image':image,
                 'form':form        
             }
-        
-             
+        if count >= limit:
+            messages.success(request, "Daily orders limit reached. Please visit tomorrow ")
+            return redirect('home')
+        messages.warning(request, "Steps For Payment \n 1. Take ScreenShot of QR code ")    
         return render(request, 'service/order.html',content)
 
 @login_required
