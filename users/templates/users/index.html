@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
+	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -11,6 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="{%static 'users/css/util.css'%}">
 	<link rel="stylesheet" type="text/css" href="{%static 'users/css/main.css'%}">
 <!--===============================================================================================-->
+{%if title%}
+    <title>{{title}}</title>
+  {%else%}
+  <link rel="shortcut icon" href="{%static 'service/img/Bulletproof_unlockuc.png'%}" /><title>Unlock Uc</title>
+  {%endif%}
 </head>
 <body>
 

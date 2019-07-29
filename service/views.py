@@ -12,8 +12,13 @@ from django.views.generic import (
 )
 
 def home(request):
-    image=user.objects.get(is_staff=True,is_superuser=False)
-    msg=image.profile.offer
+    try:
+        image=user.objects.filter(is_staff=True,is_superuser=False).first()
+        msg=image.profile.offer
+    except:
+        if request.user.is_authenticated and request.user.is_staff == True:
+            msg="Staff user profile not is not created. Contact owner"           
+    
     if msg:  
         messages.success(request, msg)
     return render(request, 'service/home.html',)
@@ -48,6 +53,13 @@ def payment(request):
         today=date.today()
         count=Order.objects.filter(order_date__date=today).count()        
         form =OrderCreation(request.POST)
+        try:
+            image=user.objects.get(is_staff=True,is_superuser=False)
+            limit=image.profile.daily_limit
+        except:
+            image=user.objects.filter(is_staff=True,is_superuser=False).first()
+            limit=image.profile.daily_limit
+            
         if count >= limit:
             messages.success(request, "Daily orders limit reached. Please visit tomorrow ")
             return redirect('home')

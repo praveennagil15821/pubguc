@@ -13,7 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel="stylesheet" href="{%static 'service/css/order.css'%}">
-	<title>UC</title>
+	{%if title%}
+    <title>{{title}}</title>
+  {%else%}
+  <link rel="shortcut icon" href="{%static 'service/img/Bulletproof_unlockuc.png'%}" /><title>Unlock Uc</title>
+  {%endif%}
 </head>
 <body>
 	<!-- Preloader Stars -->

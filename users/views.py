@@ -27,6 +27,7 @@ def signup(request):
             login(request, user)
             messages.success(request, "Registered successfully. You can now login")
             return redirect('login')
+
     else:
         form = CustomUserCreationForm()
     return render(request, 'users/signup.html', {'form': form})
@@ -46,7 +47,7 @@ def profile_update(request):
             try:
                 p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)   #want current pic detail instance=request.user.profile
             except:
-                messages.error(request, "Some error has been occured. Contact owner")
+                messages.error(request, "Please create your profile first. Contact owner.")
                 return redirect('home')
 
             if p_form.is_valid():                
@@ -57,7 +58,7 @@ def profile_update(request):
         else:
             p_form = ProfileUpdateForm()   #want current pic detail instance=request.user.profile           
             try:
-                data=user.objects.get(is_staff=True,is_superuser=False)                
+                data=user.objects.filter(is_staff=True,is_superuser=False).first()              
                 count=Order.objects.all().count()-Order.objects.filter(status='Rejected').count()   
                 today=date.today()
                 today_count=Order.objects.filter(order_date__date=today).count() 
@@ -67,7 +68,7 @@ def profile_update(request):
                         'today_count':today_count,
                 }
             except:
-                messages.error(request, "Some error has been occured. Contact owner")
+                messages.error(request, "Staff user not found. Make shure only one staff user is created except admin.")
                 return redirect('home')  
 
             return render(request,'service/profile.html',content)

@@ -17,7 +17,11 @@
 <meta name="viewport"
 content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="{%static 'service/css/profile/style.css'%}">
-	<title>UC</title>
+{%if title%}
+<title>{{title}}</title>
+{%else%}
+<link rel="shortcut icon" href="{%static 'service/img/Bulletproof_unlockuc.png'%}" /><title>Unlock Uc</title>
+{%endif%}
 </head>
 <body>
 	<!-- Preloader Stars -->

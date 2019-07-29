@@ -17,8 +17,11 @@
     <link rel="stylesheet" type="text/css" href="{%static 'service/css/rocket.css'%}" />
 
     
-  	
-	<title>UC</title>
+    {%if title%}
+    <title>{{title}}</title>
+  {%else%}
+  <link rel="shortcut icon" href="{%static 'service/img/Bulletproof_unlockuc.png'%}" /><title>Unlock Uc</title>
+  {%endif%}
 </head>
 <body>
 	<!-- Preloader Stars -->
